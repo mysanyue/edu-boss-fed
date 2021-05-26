@@ -1,4 +1,5 @@
 ## 目录结构
+
 ```
 ├── node_modules # 第三⽅包存储⽬录
 ├── public # 静态资源⽬录，任何放置在 public ⽂件夹的静态资源都会被简单的复 制，⽽不经过 webpack 
@@ -6,6 +7,11 @@
 │ └── index.html 
 ├── src 
 │ ├── assets # 公共资源⽬录，放图⽚等资源 
+| ├── styles # 公共组件⽬录 
+| | ├── index.scs # 全局样式（在入口模块被加载生效）
+| | ├── mixin.scs # 公共的 mixin 混入（可以把重复的样式封装为 mixin 混入到复用的地方）
+| | ├── reset.scs # 重置基础样式
+| | └── variables.scs # 公共样式变量
 │ ├── components # 公共组件⽬录 
 │ ├── router # 路由相关模块 
 │ ├── store # 容器相关模块 
