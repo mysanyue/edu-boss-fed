@@ -1,34 +1,18 @@
 <template>
   <div class="login">
-    <el-form
-      ref="form"
-      label-position="top"
-      label-width="80px"
-      class="login-form"
-      :model="form"
-      :rules="rules"
-    >
+    <el-form ref="form" label-position="top" label-width="80px" class="login-form" :model="form" :rules="rules">
       <el-form-item prop="phone">
         <el-input v-model="form.phone" @keyup.native.enter="onSubmit">
           <i slot="prefix" class="el-icon-user"></i>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input
-          type="password"
-          v-model="form.password"
-          @keyup.native.enter="onSubmit"
-        >
+        <el-input type="password" v-model="form.password" @keyup.native.enter="onSubmit">
           <i slot="prefix" class="el-icon-lock"></i>
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          class="login-btn"
-          :loading="btnLoading"
-          @click="onSubmit"
-        >
+        <el-button type="primary" class="login-btn" :loading="btnLoading" @click="onSubmit">
           登录
         </el-button>
       </el-form-item>
@@ -38,8 +22,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import request from '@/utils/request'
-import qs from 'qs'
 import { Form } from 'node_modules/element-ui/types'
 import { login } from '@/service/user'
 
@@ -55,20 +37,11 @@ export default Vue.extend({
       rules: {
         phone: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
-          // {
-          //   pattern: /^1\d{10$}/,
-          //   message: '请输入正确的手机号',
-          //   trigger: 'blur'
-          // }
+          // { pattern: /^1\d{10$}/, message: '请输入正确的手机号', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          {
-            min: 6,
-            max: 18,
-            message: '密码长度 6 到 18 个字符',
-            trigger: 'blur'
-          }
+          { min: 6, max: 18, message: '密码长度 6 到 18 个字符', trigger: 'blur' }
         ]
       }
     }
