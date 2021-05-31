@@ -7,12 +7,10 @@ module.exports = {
   extends: [
     'plugin:vue/essential',
     '@vue/standard',
-    '@vue/typescript/recommended',
-    'eslint:recommended'
+    '@vue/typescript/recommended'
   ],
   parserOptions: {
-    ecmaVersion: 2020,
-    parser: 'babel-eslint'
+    ecmaVersion: 2020
   },
   // 自定义编码校验规则
   rules: {

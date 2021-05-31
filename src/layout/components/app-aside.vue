@@ -1,6 +1,15 @@
 <template>
   <div class="aside">
-    <el-menu text-color="#fff" default-active="2" class="el-menu-vertical-demo" active-text-color="#ffd04b" background-color="#545c64" router @open="handleOpen" @close="handleClose">
+    <el-menu
+      text-color="#fff"
+      default-active="2"
+      class="el-menu-vertical-demo"
+      active-text-color="#ffd04b"
+      background-color="#545c64"
+      router
+      @open="handleOpen"
+      @close="handleClose"
+    >
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
