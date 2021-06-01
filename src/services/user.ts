@@ -20,3 +20,10 @@ export const login = (params: User): any => {
     data: qs.stringify(params)
   })
 }
+
+export const getUserInfo = (): any => {
+  return request({
+    method: 'get',
+    url: '/front/user/getInfo'
+  })
+}

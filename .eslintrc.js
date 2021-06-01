@@ -22,6 +22,9 @@ module.exports = {
         requireLast: true
       }
     }],
+    // 关闭any类型的警告
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     // allow async-await
     'generator-star-spacing': 'off',
     // 禁止使用 var

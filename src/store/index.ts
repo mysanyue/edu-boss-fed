@@ -5,11 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null // 当前用户状态
+    user: JSON.parse(window.localStorage.getItem('user') || 'null') // 当前用户状态
   },
   mutations: {
     setUser(state, payload) {
-      state.user = payload
+      state.user = JSON.parse(payload)
+      window.localStorage.setItem('user', payload)
     }
   },
   actions: {

@@ -23,7 +23,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Form } from 'node_modules/element-ui/types'
-import { login } from '@/service/user'
+import { login } from '@/services/user'
 
 export default Vue.extend({
   name: 'LoginIndex',
@@ -60,8 +60,10 @@ export default Vue.extend({
         if (data.state !== 1) {
           this.$message.error(data.message)
         } else {
-          // 成功 -> 跳转到首页
-          this.$router.push({ name: 'home' })
+          // 1. 登录成功，记录登录状态，状态需要能够全局访问（放到 Vuex 容器中）
+          this.$store.commit('setUser', data.content)
+          // 2. 成功 -> 跳转到首页
+          this.$router.push((this.$route.query.redirect as string) || '/')
           this.$message.success('登录成功')
         }
       } catch (error) {
