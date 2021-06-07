@@ -23,6 +23,7 @@ module.exports = {
       }
     }],
     // 关闭any类型的警告
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     // allow async-await
