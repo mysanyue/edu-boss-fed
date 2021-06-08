@@ -1,6 +1,6 @@
 <template>
-  <div class="menu-create">
-    <create-or-edit :is-edit="false" />
+  <div class="menu-edit">
+    <create-or-edit :is-edit="true" />
   </div>
 </template>
 

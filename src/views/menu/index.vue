@@ -12,8 +12,8 @@
         <el-table-column prop="orderNum" label="排序"></el-table-column>
         <el-table-column label="操作" width="100">
           <template slot-scope="scope">
-            <el-button type="text" size="small" :title="scope" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button type="text" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button type="text" size="small" :title="scope" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="handleDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -23,35 +23,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getAllMenus } from '@/services/menu'
+import { getAllMenus, deleteMenu } from '@/services/menu'
 
 export default Vue.extend({
   name: 'AdvertIndex',
   data() {
     return {
       isLoading: false,
-      menuList: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
-      ]
+      menuList: []
     }
   },
   created() {
@@ -66,8 +45,23 @@ export default Vue.extend({
       }
       this.isLoading = false
     },
-    handleEdit() {},
-    handleDelete() {}
+    handleEdit(item: any) {
+      this.$router.push({ name: 'menu-edit', params: { id: item.id } })
+    },
+    handleDelete(item: any) {
+      this.$confirm('确认删除吗？', '删除提示', {})
+        .then(async () => {
+          // 请求删除操作
+          const { data } = await deleteMenu(item.id)
+          if (data.code === '000000') {
+            this.$message.success('删除成功')
+            this.loadAllMenus()
+          }
+        })
+        .catch(() => {
+          this.$message.info('已取消删除')
+        })
+    }
   }
 })
 </script>

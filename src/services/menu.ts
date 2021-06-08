@@ -8,7 +8,7 @@ export const createOrUpdateMenu = (params: any): any => {
   })
 }
 
-export const getEditMenuInfo = (id = -1): any => {
+export const getEditMenuInfo = (id: string | number = -1): any => {
   return request({
     method: 'get',
     url: '/boss/menu/getEditMenuInfo',
@@ -20,5 +20,12 @@ export const getAllMenus = (): any => {
   return request({
     method: 'get',
     url: '/boss/menu/getAll'
+  })
+}
+
+export const deleteMenu = (id: number) => {
+  return request({
+    method: 'delete',
+    url: `/boss/menu/${id}`
   })
 }
