@@ -3,18 +3,20 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <el-form :inline="true" :model="form" class="demo-form-inline">
-          <el-form-item label="审批人">
-            <el-input v-model="form.user" placeholder="审批人"></el-input>
+          <el-form-item label="资源名称">
+            <el-input v-model="form.name" placeholder="请输入资源名称"></el-input>
           </el-form-item>
-          <el-form-item label="活动区域">
-            <el-select v-model="form.region" placeholder="活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+          <el-form-item label="资源路径">
+            <el-input v-model="form.url" placeholder="请输入资源路径"></el-input>
+          </el-form-item>
+          <el-form-item label="资源分类">
+            <el-select v-model="form.categoryId" clearable placeholder="请选择资源分类">
+              <el-option v-for="item in resourceCategories" :key="item.id" :label="item.name" :value="itme.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询搜索</el-button>
-            <el-button>重置</el-button>
+            <el-button type="primary" @click="onSubmit" :disabled="isLoading">查询搜索</el-button>
+            <el-button @click="onReset" :disabled="isLoading">重置</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -32,7 +34,7 @@
         </el-table-column>
       </el-table>
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="form.current" :page-sizes="[10, 20, 30, 40]" :page-size="form.size"
-        layout="total, sizes, prev, pager, next, jumper" :total="totalCount" background>
+        layout="total, sizes, prev, pager, next, jumper" :total="totalCount" background :disabled="isLoading">
       </el-pagination>
     </el-card>
   </div>
@@ -41,41 +43,39 @@
 <script lang="ts">
 import Vue from 'vue'
 import { getResourcePages } from '@/services/resource'
+import { getResourceCategories } from '@/services/resource-category'
+import { Form } from 'element-ui'
 
 export default Vue.extend({
   name: 'ResourceList',
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
       resources: [],
       form: {
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
+        url: '',
+        categoryId: '',
         current: 1, // 默认查询第一页
         size: 10 // 每页大小
       },
-      totalCount: 0
+      totalCount: 0,
+      resourceCategories: []
     }
   },
   created() {
     this.loadResources()
+    this.getResourceCategories()
   },
   methods: {
     onSubmit() {
-      console.log('submit!')
+      this.form.current = 1
+      this.form.size = 10
+      this.loadResources()
     },
     async loadResources() {
       this.isLoading = true
-      const { data } = await getResourcePages({
-        current: this.form.current,
-        size: this.form.size
-      })
+      const { data } = await getResourcePages(this.form)
       this.resources = data.data.records
       this.totalCount = data.data.total
       this.isLoading = false
@@ -87,6 +87,16 @@ export default Vue.extend({
     },
     handleCurrentChange(val: number) {
       this.form.current = val
+      this.loadResources()
+    },
+    async getResourceCategories() {
+      const { data } = await getResourceCategories()
+      this.resourceCategories = data.data
+    },
+    onReset() {
+      (this.$refs.from as Form).resetFields()
+      this.form.current = 1
+      this.form.size = 10
       this.loadResources()
     }
   }
