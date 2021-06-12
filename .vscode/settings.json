@@ -12,8 +12,7 @@
     "source.fixAll.stylelint": true
   },
   "editor.wordWrap": "on",
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true, //开启自动格式化
+  // "editor.formatOnSave": true,
   /* git 配置 */
   "git.confirmSync": false,
   "git.enabled": true,
@@ -43,7 +42,6 @@
   /* vetur 配置 */
   "vetur.format.defaultFormatter.js": "vscode-typescript",
   "vetur.format.defaultFormatter.html": "js-beautify-html",
-  "vetur.format.defaultFormatter.ts": "prettier",
   "vetur.format.defaultFormatterOptions": {
     "js-beautify-html": {
       "wrap_line_length": 200,
@@ -51,6 +49,17 @@
       "end_with_newline": false,
       "semi": false,
       "singleQuote": true
+    },
+    "prettier": {
+       //设置分号
+      "semi": false,
+      //双引号变成单引号
+      "singleQuote": true,
+      //禁止随时添加逗号,这个很重要。找了好久
+      "trailingComma": "none",
+      // 多少个字符后换行
+      "printWidth": 400,
+      "proseWrap": "preserve"
     }
   },
   /* 文件配置 */
@@ -74,14 +83,19 @@
     "jsx"
   ],
   "eslint.options": {
-    "extensions": [".js", ".vue"]
+    "extensions": [
+      ".js",
+      ".vue"
+    ]
   },
   /* javascript 配置*/
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "beautify.config": {
+    "indent_size": 2,
+    "brace_style": "collapse,preserve-inline",
+    "wrap_line_length": 500, //根据需要设置换行长度
+  },
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
 }

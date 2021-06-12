@@ -5,7 +5,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import './styles/index.scss'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'small' })
 Vue.config.productionTip = false
 
 new Vue({

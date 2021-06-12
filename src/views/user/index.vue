@@ -1,12 +1,17 @@
 <template>
-  <div class="advert">user</div>
+  <div class="user">
+    <user-list />
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import userList from './components/userList.vue'
+
 export default Vue.extend({
-  name: 'AdvertIndex'
+  name: 'AdvertIndex',
+  components: {
+    userList
+  }
 })
 </script>
-
-<style lang="scss" scoped></style>

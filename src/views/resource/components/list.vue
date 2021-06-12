@@ -2,7 +2,7 @@
   <div class="resource-list">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <el-form :inline="true" :model="form" class="demo-form-inline">
+        <el-form ref="form" :inline="true" :model="form" class="demo-form-inline">
           <el-form-item label="资源名称">
             <el-input v-model="form.name" placeholder="请输入资源名称"></el-input>
           </el-form-item>
@@ -11,7 +11,7 @@
           </el-form-item>
           <el-form-item label="资源分类">
             <el-select v-model="form.categoryId" clearable placeholder="请选择资源分类">
-              <el-option v-for="item in resourceCategories" :key="item.id" :label="item.name" :value="itme.id"></el-option>
+              <el-option v-for="item in resourceCategories" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
