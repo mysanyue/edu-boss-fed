@@ -6,12 +6,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CreateOrUpdate from './components/CreateOrUpdate.vue'
+import createOrUpdate from './components/createOrUpdate.vue'
 
 export default Vue.extend({
   name: 'CourseCreate',
   components: {
-    CreateOrUpdate
+    createOrUpdate
   }
 })
 </script>

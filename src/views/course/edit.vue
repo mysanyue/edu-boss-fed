@@ -1,15 +1,12 @@
 <template>
   <div class="course-create">
-    <create-or-update
-      is-edit
-      :course-id="courseId"
-    />
+    <create-or-update is-edit :course-id="courseId" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import CreateOrUpdate from './components/CreateOrUpdate.vue'
+import CreateOrUpdate from './components/createOrUpdate.vue'
 
 export default Vue.extend({
   name: 'CourseEdit',

@@ -9,6 +9,7 @@ import Vue from 'vue'
 import courseList from './components/courseList.vue'
 
 export default Vue.extend({
-  name: 'CourseIndex'
+  name: 'CourseIndex',
+  components: { courseList }
 })
 </script>

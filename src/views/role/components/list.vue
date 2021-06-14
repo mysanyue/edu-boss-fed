@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <!-- <span>筛选搜索</span> -->
-        <el-form ref="form" :model="form">
+        <el-form ref="form" :inline="true" :model="form">
           <el-form-item label="角色名称" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
@@ -12,8 +12,8 @@
             <el-button :disabled="loading" @click="onReset">重置</el-button>
           </el-form-item>
         </el-form>
+        <el-button @click="handleAdd">添加角色</el-button>
       </div>
-      <el-button @click="handleAdd">添加角色</el-button>
       <el-table :data="roles" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="编号" />
         <el-table-column prop="name" label="角色名称" />
