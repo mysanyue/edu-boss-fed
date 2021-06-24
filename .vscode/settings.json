@@ -12,7 +12,7 @@
     "source.fixAll.stylelint": true
   },
   "editor.wordWrap": "on",
-  // "editor.formatOnSave": true,
+  "editor.formatOnSave": true,
   /* git 配置 */
   "git.confirmSync": false,
   "git.enabled": true,

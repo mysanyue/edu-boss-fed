@@ -22,7 +22,7 @@
           <!-- lession -->
           <span v-else class="actions">
             <el-button @click="handleShowEditLesson(data, node.parent.data)">编辑</el-button>
-            <el-button type="success">上传视频</el-button>
+            <el-button type="success" @click="uploadVideo(node, data)">上传视频</el-button>
             <el-select class="select-status" v-model="data.status" placeholder="请选择" @change="handleLessonStatusChange(data)">
               <el-option label="已隐藏" :value="0" />
               <el-option label="待更新" :value="1" />
@@ -175,8 +175,8 @@ export default Vue.extend({
     async handleAddSection() {
       const { data } = await saveOrUpdateSection(this.section)
       this.loadSections()
-      this.isAddSectionShow = false;
-      (this.$refs['section-form'] as Form).resetFields()
+      this.isAddSectionShow = false
+      ;(this.$refs['section-form'] as Form).resetFields()
       this.$message.success('操作成功')
     },
 
@@ -234,20 +234,40 @@ export default Vue.extend({
     async handleSort(dragNode: any, dropNode: any, type: any, event: any) {
       this.isLoading = true
       try {
-        await Promise.all(dropNode.parent.childNodes.map((item: any, index: number) => {
-          if (dragNode.data.lessonDTOS) {
-            // 阶段
-            return saveOrUpdateSection({ id: item.data.id, orderNum: index + 1 })
-          } else {
-            // 课时
-            return saveOrUpdateLesson({ id: item.data.id, orderNum: index + 1 })
-          }
-        }))
+        await Promise.all(
+          dropNode.parent.childNodes.map((item: any, index: number) => {
+            if (dragNode.data.lessonDTOS) {
+              // 阶段
+              return saveOrUpdateSection({ id: item.data.id, orderNum: index + 1 })
+            } else {
+              // 课时
+              return saveOrUpdateLesson({ id: item.data.id, orderNum: index + 1 })
+            }
+          })
+        )
         this.$message.success('排序成功')
       } catch (err) {
         this.$message.error('排序失败')
       }
       this.isLoading = false
+    },
+    uploadVideo(node: any, data: any) {
+      console.log(node, data)
+      this.$router.push({
+        name: 'course-video',
+        params: {
+          // @ts-ignore
+          courseId: this.courseId,
+          // @ts-ignore
+          courseName: this.course.courseName,
+          label: node.label,
+          parentLabel: node.parent.label
+        },
+        query: {
+          sectionId: node.parent.id,
+          lessonId: data.id
+        }
+      })
     }
   }
 })
