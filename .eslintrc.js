@@ -29,6 +29,7 @@ module.exports = {
     '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-var-requires': 0,
     // allow async-await
     'generator-star-spacing': 'off',
     // allow async-await
