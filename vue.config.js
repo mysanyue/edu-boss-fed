@@ -13,7 +13,6 @@ module.exports = {
       }
     }
   },
-
   devServer: {
     proxy: {
       '/boss': {
